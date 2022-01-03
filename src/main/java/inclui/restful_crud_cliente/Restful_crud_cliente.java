@@ -27,9 +27,24 @@ public class Restful_crud_cliente {
         LinkedList_Producto linkedList_envuelta = new LinkedList_Producto();
         try {            
             Producto producto = new Producto ();
-            producto_entidad = producto.find_JSON(inser.persistence.restful_crud.Producto.class
-                    , "1", usuario, contraseña, error);
-            ret = (producto_entidad != null);
+//            producto_entidad = producto.find_JSON(inser.persistence.restful_crud.Producto.class
+//                    , "1", usuario, contraseña, error);
+//            ret = (producto_entidad != null);
+//            if (ret) {
+//                linkedList_envuelta = producto.findLike_descripcion_JSON(linkedList_envuelta.getClass()
+//                        , "0", "14", "Gracias%", usuario, contraseña, error);
+//                ret = (linkedList_envuelta != null);
+//            }            
+//            if (ret) {
+//                linkedList_envuelta = producto.find_orden_JSON(linkedList_envuelta.getClass()
+//                        , "0", "14", "codigoProducto", "desc", usuario, contraseña, error);
+//                ret = (linkedList_envuelta != null);
+//            }                        
+            if (ret) {
+                linkedList_envuelta = producto.findLike_descripcion_orden_JSON(linkedList_envuelta.getClass()
+                        , "0", "14", "Gracias%", "codigoProducto", "desc", usuario, contraseña, error);
+                ret = (linkedList_envuelta != null);
+            }                        
 //            if (ret) {
 //                ret = producto.remove("1", usuario, contraseña, error);
 //            }
