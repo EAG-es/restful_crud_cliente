@@ -188,17 +188,19 @@ public class Producto {
 
     public <T> T findLike_descripcion_JSON(Class<T> responseType, String from, String to, String descripcion, String usuario, String contraseña, String [] error) throws ClientErrorException {
         Response response;
+        jakarta.ws.rs.client.Entity entity;
         T t = null;
         int status;
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("{0}/{1}/{2}", new Object[]{from, to, descripcion}));
+        resource = resource.path(java.text.MessageFormat.format("{0}/{1}", new Object[]{from, to}));
         Builder builder = resource.request();
         MultivaluedMap<String, Object> multivaluedMap = new MultivaluedHashMap();
         multivaluedMap.add(jdbc_usuario, usuario);
         multivaluedMap.add(jdbc_contraseña, contraseña);
         builder = builder.headers(multivaluedMap);
         builder = builder.accept(jakarta.ws.rs.core.MediaType.APPLICATION_JSON);
-        response = builder.get();
+        entity = jakarta.ws.rs.client.Entity.entity(descripcion, jakarta.ws.rs.core.MediaType.APPLICATION_JSON);
+        response = builder.post(entity);
         status = response.getStatus();
         if (status < 200 || status >= 300) {
             error[0] = response.readEntity(String.class);
@@ -211,17 +213,19 @@ public class Producto {
 
     public <T> T findLike_descripcion_orden_JSON(Class<T> responseType, String from, String to, String descripcion, String campo_ordenacion, String asc, String usuario, String contraseña, String [] error) throws ClientErrorException {
         Response response;
+        jakarta.ws.rs.client.Entity entity;
         T t = null;
         int status;
         WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("{0}/{1}/{2}/{3}/{4}", new Object[]{from, to, descripcion, campo_ordenacion, asc}));
+        resource = resource.path(java.text.MessageFormat.format("{0}/{1}/{2}/{3}", new Object[]{from, to, campo_ordenacion, asc}));
         Builder builder = resource.request();
         MultivaluedMap<String, Object> multivaluedMap = new MultivaluedHashMap();
         multivaluedMap.add(jdbc_usuario, usuario);
         multivaluedMap.add(jdbc_contraseña, contraseña);
         builder = builder.headers(multivaluedMap);
         builder = builder.accept(jakarta.ws.rs.core.MediaType.APPLICATION_JSON);
-        response = builder.get();
+        entity = jakarta.ws.rs.client.Entity.entity(descripcion, jakarta.ws.rs.core.MediaType.APPLICATION_JSON);
+        response = builder.post(entity);
         status = response.getStatus();
         if (status < 200 || status >= 300) {
             error[0] = response.readEntity(String.class);
